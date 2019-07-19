@@ -1,0 +1,62 @@
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <style>
+        h4{
+            color:rgb(166,16,30);
+        }
+        label,#blood_radio{
+            color:rgb(166,16,30)!important;
+            font-size: 20!important;
+        }
+
+        button{
+            background-color: rgb(166,16,30)!important;
+        }
+    </style>
+</head>
+
+<body>
+    {% extends 'main/header.html' %}
+    {% block content %}
+        <div class="container">
+            <h4>Sign Up</h4>
+            <br>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="input-field s12 m6">
+                    <label for="username">Username</label>
+                    {{ form_user.username.errors }}
+                    {{ form_user.username }}
+                </div>
+                <div class="input-field s12 m6">
+                    <label for="mail">Mail</label>
+                    {{ form.email.errors }}
+                    {{ form.email }}
+                </div>
+                <div class="input-field s12 m6">
+                    <label for="password1">Password</label>
+                    {{ form_user.password1.errors }}
+                    {{ form_user.password1 }}
+                </div>
+                <div class="input-field s12 m6">
+                    <label for="password2">Retype Password</label>
+                    {{ form_user.password2.errors }}
+                    {{ form_user.password2 }}
+                </div>
+                <div id="blood_radio">
+                    <lablel for="blood_radio">Blood Group</lablel>
+                    <br>
+                    {% for choice in form.blood_group %}
+                        <input name="blood_group" type="radio" value="{{ choice.choice_label }}"/>
+                        <span class="radio">{{ choice.tag }}</span><br>
+                    {% endfor %}
+                </div>
+                <br>
+                <button value="Submit" class="btn waves-effect waves-light" type="submit">Submit</button>
+            </form>
+        </div>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    {% endblock %}
+</body>

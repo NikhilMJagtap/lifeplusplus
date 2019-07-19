@@ -1,0 +1,65 @@
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <style>
+        h1,.req_by, .req_for, .req_id{
+            color:rgb(166,16,30)!important;
+        }
+    </style>
+</head>
+
+<body>
+    {% extends 'main/header.html' %}
+    {% block content %}
+        <div class="container">
+            <br>
+            <div class="row">
+                {% for req in reqs %}
+                    <div class="card hoverable">
+                        <div class="card-content">
+                            <div class="card-content">
+                                <div class="card-title">
+                                    <span class="req_by">Requested by: <em>{{req.req_by.username}}</em></span>
+                                    <br>
+                                    <span class="req_for">Requested for: <em>{{req.req_for.username}}</em></span>
+                                </div>
+                                <p><span class="req_id">Request ID: {{req.id}}</span><br>{{req.text}}</p>
+                            </div>
+                            <div class="card-action"><a href="#">Donate/Contact</a></div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <br>
+
+            {% if reqs.has_other_pages %}
+                <ul class="pagination">
+                    {% if reqs.has_previous %}
+                        <li class="material-icons"><a href="?page={{ reqs.previous_page_number }}">chevron_left</a></li>
+                    {% else %}
+                        <li class="disabled material-icons"><span>chevron_left</span></li>
+                    {% endif %}
+                    {% for i in reqs.paginator.page_range %}
+                        {% if reqs.number == i %}
+                            <li class="active"><span>{{ i }} <span class="sr-only"></span></span></li>
+                        {% else %}
+                            <li class="waves-effect"><a href="?page={{ i }}">{{ i }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    {% if reqs.has_next %}
+                        <li class="material-icons"><a href="?page={{ reqs.next_page_number }}">chevron_right</a></li>
+                    {% else %}
+                        <li class="disabled material-icons"><span>chevron_right</span></li>
+                    {% endif %}
+                 </ul>
+            {% endif %}
+
+        </div>
+
+
+
+
+    {% endblock %}
+</body>

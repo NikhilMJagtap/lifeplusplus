@@ -1,0 +1,69 @@
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <style>
+        h4{
+            color:rgb(166,16,30);
+        }
+        label{
+            color:rgb(166,16,30)!important;
+            font-size: 20!important;
+        }
+
+        button{
+            background-color: rgb(166,16,30)!important;
+        }
+    </style>
+</head>
+
+<body>
+    {% extends 'main/header.html' %}
+    {% block content %}
+        <br/>
+        <div class="container">
+            <form method="post">
+                {% csrf_token %}
+                <div class="input-field s12 m6">
+                    <label for="username1">Requested By:</label>
+                    {{ form.username1.errors }}
+                    {{ form.username1 }}
+                </div>
+                <div class="input-field s12 m6">
+                    <label for="username2">Requested For:</label>
+                    {{ form.username2.errors }}
+                    {{ form.username2 }}
+                </div>
+                <div class="input-field s12 m6">
+                    <label for="text">Text:</label>
+                    {{ form.text.errors }}
+                    {{ form.text }}
+                </div>
+                <button type="submit" class="btn waves-effect waves-light">Request</button>
+            </form>
+        </div>
+        <br/>
+    {% endblock %}
+</body>
+
+
+{#<form method="post">#}
+{#                {% csrf_token %}#}
+{#                <div class="input-field ">#}
+{#                    <input value={{ user.username }} id="req_by" type="text" class="validate">#}
+{#                    <label class="active" for="req_by">Requested by:</label>#}
+{#                    {{ form.req_by.errors }}#}
+{#                </div>#}
+{#                <div class="input-field ">#}
+{#                    <input id="req_for" type="text" class="validate">#}
+{#                    <label class="active" for="req_for">Requested for:</label>#}
+{#                    {{ form.req_for.errors }}#}
+{#                </div>#}
+{#                <div class="input-field ">#}
+{#                    <input id="text" type="text" class="validate">#}
+{#                    <label class="active" for="text">Message:</label>#}
+{#                    {{ form.text.errors }}#}
+{#                </div>#}
+{#                <button type="submit" class="btn waves-effect waves-light">Request</button>#}
+{#            </form>#}

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Life++</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <style>
+        nav{
+            background-color: rgb(166,16,30)!important;
+        }
+        .page-footer{
+            background-color: rgb(166,16,30)!important;
+        }
+        .brand-logo{
+            padding-left: 15px!important;
+        }
+        .toast{
+            background-color: rgb(166,16,30)!important;
+        }
+    </style>
+
+</head>
+<body>
+    <header>
+{#        <a onclick="M.toast({html: 'I am a toast'})" class="btn">Toast!</a>#}
+        <nav>
+            <div class="nav-wrapper">
+                <a href="/" class="brand-logo left"><em>Life++</em></a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    {% if user.is_authenticated %}
+                        <li><a href="profile">{{ user.username }}</a></li>
+                        <li><a href="logout">Logout</a></li>
+                    {% else %}
+                        <li><a href="signup">Sign Up</a></li>
+                        <li><a href="login">Login</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    </header>
+    {% if messages %}
+        {% for message in messages %}
+          <script>M.toast({html: "{{message}}", classes: 'toast rounded', displayLength:2000});</script>
+        {% endfor %}
+    {% endif %}
+    {% block content %}{% endblock %}
+    <footer class="page-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">You have reached the very end.</h5>
+                    <p class="grey-text text-lighten-4">This is footer.</p>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text">Links</h5>
+                    <ul>
+                        <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+                    </ul>
+                </div>
+            </div>
+          </div>
+          <div class="footer-copyright">
+                <div class="container">
+                    © 2014 Copyright Text
+                    <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+                </div>
+          </div>
+    </footer>
+</body>
+</html>
