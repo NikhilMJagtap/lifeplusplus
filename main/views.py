@@ -6,10 +6,41 @@ from .forms import ProfileForm, RequestForm
 from .models import  Req
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from .fusioncharts import FusionCharts
+from collections import OrderedDict
 # Create your views here.
 
 def homepage(request):
-    return render(request,'main/homepage.html')
+    Reqs = Req.objects.all().filter(is_fulfilled=False) #make it true
+    dataSource = OrderedDict()
+    chartConfig = OrderedDict()
+    chartConfig['caption'] = "Caption"
+    chartConfig['subCaption'] = 'SubCaption'
+    chartConfig['xAxisName'] = 'X-Axis'
+    chartConfig['yAxisName'] = 'Y-Axis'
+    chartConfig['theme'] = 'fusion'
+    chartConfig['palettecolors'] = 'a6101e'
+    chartConfig['usePlotGradientColor'] = 0
+    dataSource['chart'] = chartConfig
+    dataSource['data'] = []
+    chartData = OrderedDict()
+    for i in range(len(Reqs)):
+        try:
+            chartData[Reqs[i].req_for.profile.blood_group] += 1
+        except KeyError:
+            chartData[Reqs[i].req_for.profile.blood_group] = 1
+        except:
+            pass
+    for key, value in chartData.items():
+        data = dict()
+        data["label"] = key
+        data["value"] = value
+        dataSource["data"].append(data)
+    column2d = FusionCharts("column2d", "ex1", "100%", "500", "chart-1", "json",
+                            # The data is passed as a string in the `dataSource` as parameter.
+                            dataSource)
+
+    return render(request,'main/homepage.html',{'output':column2d.render()})
 
 def signup(request):
     f = ProfileForm()

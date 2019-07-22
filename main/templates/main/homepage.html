@@ -1,9 +1,13 @@
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script type="text/javascript" src='../static/fusioncharts/fusioncharts.js'></script>
+{#    {% load static %}#}
+{#    <script type="text/javascript" src="{% static "main/fusioncharts.js" %}"></script>#}
+{#    <script type="text/javascript" src="{% static "main/themes/fusioncharts.theme.fint.js" %}"></script>#}
     <style>
-        .card{
-            background-color:rgb(166,16,30)!important;
+        .card {
+            background-color: rgb(166, 16, 30) !important;
         }
     </style>
 
@@ -11,7 +15,9 @@
 
 <body>
     {% extends 'main/header.html' %}
-
+    {% load static %}
+    <script type="text/javascript" src="{% static "fusioncharts/fusioncharts.js" %}"></script>
+    <script type="text/javascript" src="{% static "fusioncharts/themes/fusioncharts.theme.fint.js" %}"></script>
     {% block content %}
         <br><br>
         <div class="row">
@@ -49,6 +55,19 @@
                 </div>
             </div>
         </div>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+{#        <hr>#}
+        <div class="row">
+            <div class="s12 m6 l4">
+                <div id="chart-1" class="container">{{ output | safe}}</div>
+            </div>
+            <div class="s12 m6 l4">
+                <div id="chart-2" class="container">{{ output | safe}}</div>
+            </div>
+{#                <div class="s12 m6 l4 xl4">#}
+{#                    <div id="chart-1">{{ output | safe}}</div>#}
+{#                </div>#}
+        </div>
+        <hr>
+{#        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>#}
     {% endblock %}
 </body>
