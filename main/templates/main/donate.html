@@ -13,6 +13,10 @@
             #map{
                 height:400px;
                 width:100%;
+               /* float:right;*/
+            }
+            #float-left{
+                float:left;
             }
         </style>
     </head>
@@ -23,10 +27,9 @@
             <div class="container">
                 <br>
                 <div class="row">
-                    <div class="col">
                         {% for req in reqs %}
                             <div class="card hoverable">
-                                <div class="card-content">
+                                <div class="card-content" id='float-left'>
                                     <div class="card-content">
                                         <div class="card-title">
                                             <span class="req_by">Requested by: <em>{{req.req_by.username}}</em></span>
@@ -37,8 +40,20 @@
                                     </div>
                                     <div class="card-action"><a href="#">Donate/Contact</a></div>
                                 </div>
+                                <div class="container">
+                                    <div id="map">
+                                        <script>
+                                            function initMap(){
+                                                var location = {lat:19.1232,lng:72.8361};
+                                                var map = new google.maps.Map(document.getElementById('map'),{zoom:4,center:location});
+                                                var marker = new google.maps.Marker({position:location,map:map});
+                                            }
+                                        </script>
+                                    </div>
+                                </div>
                             </div>
-                             <div id="map">
+                            <!--  -->
+                            <!-- <div id="map">
                                 <script>
                                     function initMap(){
                                         var location = {lat:19.1232,lng:72.8361};
@@ -46,9 +61,9 @@
                                         var marker = new google.maps.Marker({position:location,map:map});
                                     }
                                 </script>
-                            </div>
+                            </div> -->
                         {% endfor %}
-                    </div>
+                    <!-- </div> -->
                 </div>
                 <br>
 
